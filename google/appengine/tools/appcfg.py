@@ -46,7 +46,7 @@ import time
 import urllib
 import urllib2
 
-import google
+import google.appengine
 import yaml
 from google.appengine.cron import groctimespecification
 from google.appengine.api import appinfo
@@ -229,7 +229,7 @@ def GetVersionObject(isfile=os.path.isfile, open_fn=open):
   Returns:
     A Yaml object or None if the VERSION file does not exist.
   """
-  version_filename = os.path.join(os.path.dirname(google.__file__),
+  version_filename = os.path.join(os.path.dirname(os.path.dirname(google.appengine.__file__)),
                                   VERSION_FILE)
   if not isfile(version_filename):
     logging.error('Could not find version file at %s', version_filename)

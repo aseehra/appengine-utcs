@@ -80,7 +80,7 @@ import types
 import urlparse
 import urllib
 
-import google
+import google.appengine
 from google.pyglib import gexcept
 
 from google.appengine.api import apiproxy_stub_map
@@ -2491,7 +2491,7 @@ class PathAdjuster(object):
       The adjusted path.
     """
     if path.startswith(PYTHON_LIB_VAR):
-      path = os.path.join(os.path.dirname(os.path.dirname(google.__file__)),
+      path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(google.appengine.__file__))),
                           path[len(PYTHON_LIB_VAR) + 1:])
     else:
       path = os.path.join(self._root_path, path)
@@ -3022,7 +3022,7 @@ def GetVersionObject(isfile=os.path.isfile, open_fn=open):
   Returns:
     A Yaml object or None if the VERSION file does not exist.
   """
-  version_filename = os.path.join(os.path.dirname(google.__file__),
+  version_filename = os.path.join(os.path.dirname(os.path.dirname(google.appengine.__file__)),
                                   VERSION_FILE)
   if not isfile(version_filename):
     logging.error('Could not find version file at %s', version_filename)
@@ -3843,7 +3843,7 @@ def CreateServer(root_path,
                  allow_skipped_files=False,
                  static_caching=True,
                  python_path_list=sys.path,
-                 sdk_dir=os.path.dirname(os.path.dirname(google.__file__))):
+                 sdk_dir=os.path.dirname(os.path.dirname(os.path.dirname(google.appengine.__file__)))):
   """Creates an new HTTPServer for an application.
 
   The sdk_dir argument must be specified for the directory storing all code for

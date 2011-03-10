@@ -37,17 +37,17 @@ USING_SDK = not server_software or server_software.startswith('Dev')
 del server_software
 
 if not USING_SDK:
-  import google
-  this_version = os.path.dirname(os.path.dirname(google.__file__))
+  import google.appengine
+  this_version = os.path.dirname(os.path.dirname(os.path.dirname(google.appengine.__file__)))
   versions = os.path.dirname(this_version)
   PYTHON_LIB = os.path.dirname(versions)
   del google, this_version, versions
 else:
   try:
-    import google
+    import google.appengine
   except ImportError:
     import google as google
-  PYTHON_LIB = os.path.dirname(os.path.dirname(google.__file__))
+  PYTHON_LIB = os.path.dirname(os.path.dirname(os.path.dirname(google.appengine.__file__)))
   del google
 
 installed = {}
